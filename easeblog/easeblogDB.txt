@@ -1,0 +1,48 @@
+Database Name: easeblog
+
+Table Name: users
+Columns:
+studID (Primary Key, VARCHAR)
+firstname VARCAHR(50)
+lastname VARCHAR(50)
+username (VARCHAR(50), Not Null)
+password (VARCHAR(255), Not Null)
+
+Table Name: posts
+Columns:
+postID (Primary Key, Auto Increment, INT)
+title (VARCHAR(255), Not Null)
+content (TEXT, Not Null)
+studID (VARCHAR, Not Null, Foreign Key to users(studID))
+created_at (TIMESTAMP, Default Current Timestamp)
+Comments Table:
+
+Table Name: comments
+Columns:
+commentID (Primary Key, Auto Increment, INT)
+postID (INT, Not Null, Foreign Key to posts(postID))
+studID (VARCHAR, Not Null, Foreign Key to users(studID))
+comment (TEXT, Not Null)
+commentCreated (TIMESTAMP, Default Current Timestamp)
+Likes Table:
+
+Table Name: likes
+Columns:
+likeID (Primary Key, Auto Increment, INT)
+postID (INT, Not Null, Foreign Key to posts(postID))
+studID (VARCHAR, Not Null, Foreign Key to users(studID))
+likeCreated (TIMESTAMP, Default Current Timestamp)
+Images Table:
+
+Table Name: images
+Columns:
+imageID (Primary Key, Auto Increment, INT)
+postID (INT, Not Null, Foreign Key to posts(postID))
+image_path (VARCHAR(255), Not Null)
+
+Table Name: shared_posts 
+shareID INT AUTO_INCREMENT PRIMARY KEY,
+postID INT NOT NULL(FOREIGN KEY (postID) REFERENCES posts(postID)),
+shared_by_studID VARCHAR(50) NOT NULL(FOREIGN KEY (shared_by_studID) REFERENCES users(studID),),
+shared_from_studID VARCHAR(50) NOT NULL(FOREIGN KEY (shared_from_studID) REFERENCES users(studID)),
+shared_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
